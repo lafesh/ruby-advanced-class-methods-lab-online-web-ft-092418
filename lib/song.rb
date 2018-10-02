@@ -43,6 +43,12 @@ class Song
   def self.new_from_filename(file)
     artist_name, song_name = file.split(" - ")
     song_name.gsub!("mp3", "")
+    self.new_by_name(song_name).tap{|song| song.artist_name = artist_name}
   end 
+  
+  def self.create_from_filename(file)
+    self.new_from_filename(file).tap{|song| song.save}
+  end 
+    
 
 end
